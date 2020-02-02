@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "fd1f4744-f722-4b6b-b8d4-58b15b951a9f",
+		"name": "preeschool-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"lizan@gmail.com\",\n\t\"password\": \"Li@17011996\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token ",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"director@gmail.com\",\n\t\"first_name\": \"Director\",\n\t\"last_name\": \"Apellido\",\n\t\"password\": \"123412156\",\n\t\"ci\": \"1245552334\",\n\t\"type\": \"director\",\n\t\"is_admin\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/signup/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"signup",
+						""
+					]
+				},
+				"description": "type={\"teacher\", \"director\", \"coordinator\", \"administrative_personal\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "Staff",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 4d7d1dbe6518fb59b720a5a07fe66a9943801d73",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/staff/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"staff",
+						""
+					]
+				},
+				"description": "Get staff personal.\n\nRequired: IsAdmin, IsAuthenticated\n\nParams:\n\nis_admin={true, false}\n\ntype={\"teacher\", \"director\", \"coordinator\", \"administrative_personal\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "Staff Actions List by User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 4d7d1dbe6518fb59b720a5a07fe66a9943801d73"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/staff_action/list/?user=2&type=departure",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"staff_action",
+						"list",
+						""
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "2"
+						},
+						{
+							"key": "type",
+							"value": "departure"
+						}
+					]
+				},
+				"description": "Get staff actions by personal.\n\nRequired: IsAuthenticated\n\nParams:\n\nuser= user.id\n\ntype= {\"arrival\", \"departure\"}"
+			},
+			"response": []
+		},
+		{
+			"name": "Staff Action",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 4d7d1dbe6518fb59b720a5a07fe66a9943801d73"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"staff\": 2,\n\t\"action\": \"departure\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/staff_action/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"staff_action",
+						""
+					]
+				},
+				"description": "Set staff action.\n\nRequired: IsAdmin, IsAuthenticated\n\nBody:\nstaff= is of user.id\naction={\"arrival\", \"departure\" }"
+			},
+			"response": []
+		},
+		{
+			"name": "Attendance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 4d7d1dbe6518fb59b720a5a07fe66a9943801d73",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"ci\": \"1245552334\",\n\t\"password\": \"123412156\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/attendance/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"attendance",
+						""
+					]
+				},
+				"description": "Set staff action.\n\n\nBody:\nci: is staff.ci\npassword: user password"
+			},
+			"response": []
+		},
+		{
+			"name": "Staff Setting",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token 4d7d1dbe6518fb59b720a5a07fe66a9943801d73"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/staff_setting/setting/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"staff_setting",
+						"setting",
+						""
+					]
+				},
+				"description": "Set staff setting is admin.\n\nRequired: IsAdmin, IsAuthenticated\n\nBody:\nuser= is of user.id"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
