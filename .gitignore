@@ -1,0 +1,17 @@
+;;extensions to ignore
+*.log
+*.pot
+*.pyc
+.vscode
+*~
+desktop.ini
+db.sqlite3
+
+\.DS_Store
+
+\.idea/
+
+public
+\.certsgen/
+smart_contracts/node_modules/
+smart_contracts/build/contracts/
