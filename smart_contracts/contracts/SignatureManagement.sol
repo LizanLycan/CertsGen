@@ -276,6 +276,10 @@ contract CertifierDependencyManager {
     function getAllSignerNonce() public view returns (address[] memory) {
         return signerNonceIndex;
     }
+
+    function getSignerNonceCount() public view returns (uint256) {
+        return signerNonceIndex.length;
+    }
 }
 
 /**

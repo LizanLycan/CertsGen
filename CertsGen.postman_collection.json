@@ -1,0 +1,599 @@
+{
+	"info": {
+		"_postman_id": "91d64e79-48a9-494a-9367-a5a6d37a8096",
+		"name": "CertsGen",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Registrar Autoridad de Acreditación",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1d10158-7e6e-4ad1-9142-a8cd24853936",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"aa_token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"owner\": \"0x1b8dF270A665A1DE60c29251F4054c8aF2e5690a\",\n\t\"name\": \"Boss Enterprises CA\",\n\t\"id\": 231398,\n\t\"password\": \"1234567890\",\n\t\"email\": \"boss@example.com\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/register/accreditation-authority/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"register",
+						"accreditation-authority",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ingresar Autoridad de Acreditación ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1130fc5-bd04-4054-9715-32967d172a23",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"aa_token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"{{email}}\",\n\t\"password\": \"{{password}}\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/accreditation-authority/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"accreditation-authority",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Autoridad de Certificación",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "05523816-29d0-4046-b64c-4edff0ecab10",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"ca_token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token {{aa_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"owner\": \"0xF4a2081BBADaa6Bd6C57d53689775d3ff9093077\",\n\t\"name\": \"Boss Enterprises CE\",\n\t\"id\": 231398,\n\t\"email\": \"boss_ce@example.com\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/register/certification-authority/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"register",
+						"certification-authority",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ingresar Autoridad de Certificación",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 1f0bbb7371de2093513ea60e48b7bc4d8ba43f49",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"certification.zerpa_17@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/certification-authority/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"certification-authority",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Certificador 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4bf7e852-d6c1-4a77-b5cd-e26c40533229",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"c_token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{ca_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"owner\": \"0x1c6794CeDFa0A67E368fCA9E8Dc5469be764E1eD\",\n\t\"name\": \"Certifier One\",\n\t\"id\": \"ID document\",\n\t\"id_number\": 8987987,\n\t\"email\": \"certifier_one@example.com\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/register/certifier/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"register",
+						"certifier",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ingresar Certificador 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 82ca7695fe3dab90b5f1de9d3067ea174f0ba01d",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"certifier.zerpa_17@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/certifier/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"certifier",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Beneficiario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "05f6773d-5564-41a6-8e9b-f20555ba4d58",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"r_token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{ca_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"owner\": \"0x1b8dF270A665A1DE60c29251F4054c8aF2e5690a\",\n\t\"name\": \"Jon Doe\",\n\t\"id\": \"ID document\",\n\t\"id_number\": 89879827,\n\t\"email\": \"jon_doe@example.com\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/register/recipient/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"register",
+						"recipient",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ingresar Beneficiario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 82ca7695fe3dab90b5f1de9d3067ea174f0ba01d",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"recipient2.zerpa_17@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/recipient/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"recipient",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Certificador 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{ca_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"owner\": \"0xF4a2081BBADaa6Bd6C57d53689775d3ff9093077\",\n\t\"name\": \"Johny Link\",\n\t\"id\": \"Id Document\",\n\t\"id_number\": 8987987,\n\t\"email\": \"johny_link@example.com\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/register/certifier/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"register",
+						"certifier",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ingresar Certificador 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token 82ca7695fe3dab90b5f1de9d3067ea174f0ba01d",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"certifier2.zerpa_17@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/certifier/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"certifier",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Certificadores",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{ca_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"owner\": \"0xF4a2081BBADaa6Bd6C57d53689775d3ff9093077\",\n\t\"name\": \"Johny Link\",\n\t\"id\": \"Id Document\",\n\t\"id_number\": 8987987,\n\t\"email\": \"johny_link@example.com\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/get/certifiers/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"get",
+						"certifiers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Certificado (Certificador 1)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token {{c_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"recipient_address\": \"0x3EDaF337bEfb834C4ef88ff5e5aF23d8041BBdb1\",\n\t\"title\": \"Certificate With First Certifier\",\n\t\"description\": \"Its the second certificate\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/register/certificate/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"register",
+						"certificate",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar dependencia cert1 a cert2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{ca_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"certificate_address\": \"0x72E568F425f0791DF066C30F7D7426125cEef52d\",\n\t\"from_owner\": \"0x1c6794CeDFa0A67E368fCA9E8Dc5469be764E1eD\",\n\t\"to_owner\": \"0xF4a2081BBADaa6Bd6C57d53689775d3ff9093077\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/add/certifier-dependency/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"add",
+						"certifier-dependency",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar firma (Certificador 1)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{c_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"certificate_address\": \"0x76f395B17cCe101CCEdc9e7c9E494e93A811fD5D\",\n\t\"params\": \"Its the second sign\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/add/signature/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"add",
+						"signature",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Certificates",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Token {{r_token}}"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/get/certificates/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"get",
+						"certificates",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

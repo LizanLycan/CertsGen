@@ -212,12 +212,14 @@ class GetCertificateView(viewsets.GenericViewSet,
                     "CertifierDependencyManager",
                     address=certificate.functions.getCertifierDependencies().call()
                 )
+                sig_nonce = dependencies.functions.getAllSignerNonce().call()
+                print(sig_nonce)
                 certificates_all.append(
                     {
                         "title": Web3.toText(info[0]).rstrip('\x00'),
                         "info": Web3.toText(info[1]).rstrip('\x00'),
                         "address": address,
-                        "is_validated": dependencies.functions.getCertifierDependencyCount().call() > 0
+                        "is_validated": len(dependencies.functions.getAllSignerNonce().call()) > 0
                     }
                 )
 
