@@ -101,7 +101,9 @@ class AccreditationAuthorityRegisterView(viewsets.GenericViewSet,
             content_object=a_authority
         )
 
-        return Response({"detail": "OK"})
+        token, created = Token.objects.get_or_create(user=user_created)
+
+        return Response({"token": token.key})
 
 
 class CertificationAuthorityRegisterView(viewsets.GenericViewSet,
@@ -300,6 +302,7 @@ class RecipientRegisterView(viewsets.GenericViewSet,
                                                   address=recipient_manager_address
                                                   )
             tx_hash = recipient_manager.functions.insertRecipient(
+                ca.address,
                 Web3.toChecksumAddress(validated_data["owner"]),
                 Web3.toBytes(text=validated_data["name"]),
                 Web3.toBytes(text=validated_data["email"]),

@@ -94,7 +94,7 @@ class SignatureRegisterView(viewsets.GenericViewSet,
             certifiers_dependencies_sc.functions.insertSignerNonce(
                 certifier.owner,
                 nonce
-            )
+            ).transact({"from": certifier.owner})
 
         except ValueError as err:
             vm_error = json.loads(str(err).replace("\'", "\""))

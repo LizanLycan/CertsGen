@@ -86,6 +86,7 @@ contract Recipient is User {
         uint256 _index
     ) public User(_owner, _name, _email, _id, _id_number, _index) {
         certificates = new CertificateManager();
+        certificationAuthority = _certificationAuthority;
     }
 
     function getCertificateManager() public view returns (CertificateManager) {
@@ -140,29 +141,31 @@ contract RecipientManager {
     }
 
     function insertRecipient(
-        address owner,
-        bytes32 name,
-        bytes32 email,
-        bytes32 id,
-        uint256 id_number
+        address _certificationAuthority,
+        address _owner,
+        bytes32 _name,
+        bytes32 _email,
+        bytes32 _id,
+        uint256 _id_number
     ) public returns (uint256 index) {
-        if (isRecipient(owner)) revert("Recipient already exist");
+        if (isRecipient(_owner)) revert("Recipient already exist");
 
-        recipientIndex.push(owner);
+        recipientIndex.push(_owner);
 
-        uint256 _index = recipientIndex.length - 1;
+        uint256 __index = recipientIndex.length - 1;
 
-        recipients[owner].recipient = new Recipient(
-            owner,
-            name,
-            email,
-            id,
-            id_number,
-            _index
+        recipients[_owner].recipient = new Recipient(
+            _certificationAuthority,
+            _owner,
+            _name,
+            _email,
+            _id,
+            _id_number,
+            __index
         );
-        recipients[owner].index = _index;
+        recipients[_owner].index = __index;
 
-        emit LogNewRecipient(owner, recipients[owner].index);
+        emit LogNewRecipient(_owner, recipients[_owner].index);
 
         return recipientIndex.length - 1;
     }

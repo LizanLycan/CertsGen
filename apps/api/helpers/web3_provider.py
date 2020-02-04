@@ -1,7 +1,7 @@
 from web3 import Web3, HTTPProvider
 from django.contrib.staticfiles.storage import staticfiles_storage
 import json
-w3 = Web3(HTTPProvider('http://localhost:7545'))
+w3 = Web3(HTTPProvider('http://localhost:8545'))
 
 
 def contract_deployed(name, address=None):
